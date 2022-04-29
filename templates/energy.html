@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Energy</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea magnam laborum voluptatem aut obcaecati perspiciatis. Itaque autem sed enim sapiente iure reprehenderit possimus molestias inventore quibusdam distinctio ab, iusto adipisci!</p>
+    <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+    <div>
+        <div class="uk-card uk-card-secondary uk-card-body">
+            <h4>LAST MONTH<h4>
+                <p>High:</p>
+                <p>Loww:</p>
+        </div>
+    </div>
+    <div>
+        <div class="uk-card uk-card-secondary uk-card-body">
+            <h4>PREVIOUS MONTH<h4>
+                <p>High:</p>
+                <p>Loww:</p>
+        </div>
+    </div>
+    <div>
+        <div class="uk-card uk-card-secondary uk-card-body">
+            <h4>THIS YEAR</h4>
+                <p>High:</p>
+                <p>Loww:</p>
+        </div>
+    </div>
+</div>
+    <ul>
+        {% for energy_row in energy_data %}
+        <li>{{ energy_row.date }} | {{ energy_row.quantity_high}} {{ energy_row.quantity_low}}</li>
+        {% endfor %}
+    </ul>
+
+        <canvas id="myChart" width="600" height="400"></canvas>
+
+
+    <script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for energy_row in energy_data %}
+                    "{{ energy_row.date }}",
+                {% endfor %}],
+        datasets: [{
+            label: 'High',
+            data: [
+                {% for energy_row in energy_data %}
+                    {{ energy_row.quantity_high }},
+                {% endfor %}],
+            backgroundColor: [
+                'red',
+
+            ],
+            borderColor: [
+                'navy',
+
+            ],
+            borderWidth: 1
+        },
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+{% endblock %}
