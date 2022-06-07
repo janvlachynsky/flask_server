@@ -1,7 +1,31 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h1>Energy</h1>
+    <h1>Add new entry</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea magnam laborum voluptatem aut obcaecati perspiciatis. Itaque autem sed enim sapiente iure reprehenderit possimus molestias inventore quibusdam distinctio ab, iusto adipisci!</p>
+    <div class="uk-width-large">
+    <form>
+    <fieldset class="uk-fieldset">
 
+        <legend class="uk-legend">Fill up following fields</legend>
+
+        <div class="uk-margin">
+            <input class="uk-input" type="text" placeholder="High tariff">
+        </div>
+        <div class="uk-margin">
+            <input class="uk-input" type="text" placeholder="Low tariff">
+        </div>
+                <div class="uk-margin">
+
+            <input class="uk-input" type="datetime-local" placeholder="Date - empty for current" value={{date}}>
+        </div>
+
+        <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Note"></textarea>
+        </div>
+
+
+    </fieldset>
+</form>
+</div>
 {% endblock %}

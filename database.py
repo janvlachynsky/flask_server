@@ -4,12 +4,15 @@ import pymysql.cursors
 class Database:
 
     def __init__(self):
-        self.connection = pymysql.connect(host='sql.endora.cz',
-            user='homeuser',
-            password='Ab1122334455',
-            port=3308,
-            database='energydb',
-            cursorclass=pymysql.cursors.DictCursor)
+        try:
+            self.connection = pymysql.connect(host='sql.endora.cz',
+                user='homeuser',
+                password='Ab1122334455',
+                port=3308,
+                database='energydb',
+                cursorclass=pymysql.cursors.DictCursor)
+        except:
+            raise Exception("Cannot connect to DB!")
 
     def getEletricityEntries(self):
         with self.connection:

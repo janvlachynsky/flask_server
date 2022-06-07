@@ -1,6 +1,8 @@
+from numpy import datetime_as_string
 from flask import Flask, render_template, flash, redirect, url_for, session, logging
 
 from database import Database
+from datetime import datetime
 
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
@@ -28,6 +30,10 @@ def energy():
 
     return render_template('energy.html', energy_data=energy_data)
 
+@app.route('/energy/add_entry')
+def add_entry():
+    date = datetime.now()
+    return render_template('energy_add_entry.html', date=date)
 
 
 class RegisterForm(Form):
