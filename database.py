@@ -1,16 +1,17 @@
-
 import pymysql.cursors
 
-class Database:
 
+class Database:
     def __init__(self):
         try:
-            self.connection = pymysql.connect(host='sql.endora.cz',
-                user='homeuser',
-                password='Ab1122334455',
+            self.connection = pymysql.connect(
+                host="sql.endora.cz",
+                user="homeuser",
+                password="Ab1122334455",
                 port=3308,
-                database='energydb',
-                cursorclass=pymysql.cursors.DictCursor)
+                database="energydb",
+                cursorclass=pymysql.cursors.DictCursor,
+            )
         except:
             raise Exception("Cannot connect to DB!")
 
@@ -23,3 +24,12 @@ class Database:
                 result = cursor.fetchall()
                 return result
 
+    def addEletricityEntry(self, lowTariff, highTariff, date):
+        with self.connection:
+            with self.connection.cursor() as cursor:
+                sql = """
+                INSERT INTO eletricity (quantity_low, quantity_high, date)
+                VALUES ({lowTariff}, {highTariff}, {date})
+                """
+
+    ## TODO: generic adding method

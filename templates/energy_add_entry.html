@@ -4,28 +4,67 @@
     <h1>Add new entry</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea magnam laborum voluptatem aut obcaecati perspiciatis. Itaque autem sed enim sapiente iure reprehenderit possimus molestias inventore quibusdam distinctio ab, iusto adipisci!</p>
     <div class="uk-width-large">
-    <form>
+        {% if form %}
+         LT:{{ form.lowTariff}}</br>
+         HT: {{form.highTariff}} </br>
+         date: {{form.date}}
+        {% endif %}
+    <form method="POST", action="">
     <fieldset class="uk-fieldset">
 
         <legend class="uk-legend">Fill up following fields</legend>
 
         <div class="uk-margin">
-            <input class="uk-input" type="text" placeholder="High tariff">
+            <label for="highTariff">High tariff (kw)</label>
+            {% if form.highTariff.errors %}
+                <ul class="errors">
+                    {% for error in form.highTariff.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <input class="uk-input" type="number" name="highTariff" placeholder="High tariff"  value={{last_form['highTariff']}}>
         </div>
         <div class="uk-margin">
-            <input class="uk-input" type="text" placeholder="Low tariff">
+            <label for="lowTariff">Low tariff (kw)</label>
+            {% if form.lowTariff.errors %}
+                <ul class="errors">
+                    {% for error in form.lowTariff.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <input class="uk-input" type="number" name="lowTariff" id="lowTariff" placeholder="Low tariff" value={{last_form['lowTariff']}}>
         </div>
-                <div class="uk-margin">
-
-            <input class="uk-input" type="datetime-local" placeholder="Date - empty for current" value={{date}}>
+        <div class="uk-margin">
+            {{date}}
+            {% if form.date.errors %}
+                <ul class="errors">
+                    {% for error in form.date.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <input class="uk-input" type="datetime-local" name="date" placeholder="Date - empty for current" value={{date}}>
         </div>
 
         <div class="uk-margin">
-            <textarea class="uk-textarea" rows="5" placeholder="Note"></textarea>
+            {% if form.note.errors %}
+                <ul class="errors">
+                    {% for error in form.note.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <textarea class="uk-textarea" rows="5" name="note" placeholder="Note"  value={{last_form['note']}}></textarea>
         </div>
+        <div class="uk-margin">
+            <input type="submit" value="Submit">
 
+        </div>
 
     </fieldset>
 </form>
+
 </div>
 {% endblock %}

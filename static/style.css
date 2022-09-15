@@ -6,3 +6,9 @@ h1 strong {
 .uk-width-xlarge{
     width: 900px;
 }
+
+.errors {
+    color: red;
+    margin-top: 0px;
+    font-size: 10pt;
+}
